@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Year Wish Card</title>
+    <style>
+        /* General reset */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Dynamic background */
+        body {
+            background: black;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dynamic-background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, #002f4b, #dc4225);
+            animation: backgroundAnimation 6s infinite alternate;
+        }
+
+        @keyframes backgroundAnimation {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.1); opacity: 0.9; }
+        }
+
+        /* Stylish envelope */
+        .card-envelope {
+            width: 350px;
+            height: 250px;
+            background: linear-gradient(135deg, #1e90ff, #4682b4);
+            position: relative;
+            border: 2px solid #ffffff;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            animation: fly 3s infinite ease-in-out;
+            border-radius: 5px;
+            text-align: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .card-envelope::before {
+            content: 'Click and Hold';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #ffffff;
+            font-size: 0.9rem;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes fly {
+            0%, 100% { transform: translateY(-20px); }
+            50% { transform: translateY(20px); }
+        }
+
+        /* Card sliding out */
+        .card-inside {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 90%;
+            height: 90%;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: inset 0 5px 15px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.5s ease-in-out, top 0.5s ease-in-out;
+            color: black;
+            text-align: center;
+        }
+
+        .card-envelope:active .card-inside {
+            transform: translate(-50%, -120%) scale(1);
+            top: 50%;
+        }
+
+        /* Highlight text when active */
+        .card-envelope:active .card-inside h1,
+        .card-envelope:active .card-inside p {
+            color: #ff4500;
+            transition: color 0.3s ease;
+        }
+
+        /* Greetings */
+        .card-inside h1 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #1e90ff;
+        }
+
+        .card-inside p {
+            font-size: 1rem;
+            margin: 5px 0;
+            color: #444;
+        }
+
+        .card-inside p span {
+            font-weight: bold;
+            color: #87cefa;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 600px) {
+            .card-envelope {
+                width: 300px;
+                height: 200px;
+                font-size: 1rem;
+            }
+
+            .card-envelope::before {
+                font-size: 0.8rem;
+            }
+
+            .card-inside h1 {
+                font-size: 1.5rem;
+            }
+
+            .card-inside p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dynamic-background"></div>
+    <div class="card-envelope" onmousedown="playSong()" onmouseup="stopSong()">
+        <div class="card-inside">
+            <h1>Happy New Year!</h1>
+            <p>Wishing my <span>Family</span> a joyous and prosperous New Year!</p>
+            <p>To my <span>Best Friend</span>, may your year be full of adventure and laughter!</p>
+            <p>To my dear <span>Brother</span>, achieve all your dreams this year!</p>
+            <p>To my lovely <span>Sister</span>, shine bright and reach new heights!</p>
+        </div>
+    </div>
+
+    <audio id="song" src="https://www.bensound.com/bensound-music/bensound-dreams.mp3"></audio>
+
+    <script>
+        const song = document.getElementById('song');
+
+        function playSong() {
+            song.currentTime = 0; // Restart the song
+            song.play();
+        }
+
+        function stopSong() {
+            song.pause();
+        }
+    </script>
+</body>
+</html>
